@@ -66,8 +66,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // RENDER THONG KE
-    function renderStats() {
-        const stats = window.HTLAIEngine ? window.HTLAIEngine.getDashboardStats() : { total_leads: 0, new_leads: 0, total_blogs: 0, total_projects: 0 };
+    async function renderStats() {
+        const stats = window.HTLAIEngine ? await window.HTLAIEngine.getDashboardStats() : { total_leads: 0, new_leads: 0, total_blogs: 0, total_projects: 0 };
         document.getElementById('statTotalLeads').textContent = stats.total_leads;
         document.getElementById('statNewLeads').textContent = stats.new_leads;
         document.getElementById('statTotalBlogs').textContent = stats.total_blogs;
@@ -75,8 +75,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // RENDER LEADS
-    function renderLeads() {
-        const contacts = window.HTLDatabase.getContacts();
+    async function renderLeads() {
+        const contacts = await window.HTLDatabase.getContacts();
         const recentTable = document.getElementById('recentLeadsTable');
         const fullTable = document.getElementById('fullLeadsTable');
 
@@ -121,8 +121,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // RENDER BLOGS
-    function renderBlogs() {
-        const blogs = window.HTLDatabase.getBlogs();
+    async function renderBlogs() {
+        const blogs = await window.HTLDatabase.getBlogs();
         const blogsTable = document.getElementById('blogsTable');
         if (!blogsTable) return;
 
@@ -144,8 +144,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // RENDER PROJECTS
-    function renderProjects() {
-        const projects = window.HTLDatabase.getProjects();
+    async function renderProjects() {
+        const projects = await window.HTLDatabase.getProjects();
         const projectsTable = document.getElementById('projectsTable');
         if (!projectsTable) return;
 
@@ -168,14 +168,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // FORM THEM BLOG THU CONG
     const createBlogForm = document.getElementById('createBlogForm');
     if (createBlogForm) {
-        createBlogForm.addEventListener('submit', (e) => {
+        createBlogForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const title = document.getElementById('blogTitle').value;
             const category = document.getElementById('blogCategory').value;
             const image_url = document.getElementById('blogImage').value;
             const content = document.getElementById('blogContent').value;
 
-            window.HTLAIEngine.publishBlog({ title, category, cover_image: image_url, content });
+            await window.HTLAIEngine.publishBlog({ title, category, cover_image: image_url, content });
             createBlogForm.reset();
             alert('Bài viết đã được xuất bản ĐĂNG NGAY thành công!');
             initDashboard();
@@ -185,7 +185,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // FORM THEM PROJECT THU CONG
     const createProjectForm = document.getElementById('createProjectForm');
     if (createProjectForm) {
-        createProjectForm.addEventListener('submit', (e) => {
+        createProjectForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const title = document.getElementById('projTitle').value;
             const category = document.getElementById('projCategory').value;
@@ -194,7 +194,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const image_url = document.getElementById('projImage').value;
             const description = document.getElementById('projDesc').value;
 
-            window.HTLAIEngine.publishProject({ title, category, metric_value, metric_label, image_url, description });
+            await window.HTLAIEngine.publishProject({ title, category, metric_value, metric_label, image_url, description });
             createProjectForm.reset();
             alert('Dự án Portfolio đã được đăng thành công!');
             initDashboard();
@@ -204,40 +204,39 @@ document.addEventListener('DOMContentLoaded', () => {
     // QUICK AI PUBLISH TEST
     const btnQuickAIPublish = document.getElementById('btnQuickAIPublish');
     if (btnQuickAIPublish) {
-        btnQuickAIPublish.addEventListener('click', () => {
+        btnQuickAIPublish.addEventListener('click', async () => {
             btnQuickAIPublish.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> AI Đang Biên Tập & Đăng...';
+            
+            const sampleTitles = [
+                "Xây Dựng Hệ Thống Lead Funnel Tự Động Với AI Agent 2026",
+                "Bí Quyết Ứng Dụng Midjourney Sáng Tạo Ấn Phẩm Marketing Độc Quyền",
+                "Cách Tối Ưu Chi Phí Quảng Cáo Facebook Bằng Phân Tích Data Dữ Liệu"
+            ];
+            const randomTitle = sampleTitles[Math.floor(Math.random() * sampleTitles.length)];
+
+            await window.HTLAIEngine.publishBlog({
+                title: randomTitle,
+                category: 'AI Automation',
+                content: `<p>Đây là bài viết được AI Agent sáng tạo và tự động ĐĂNG NGAY tức thì lên CSDL website mà không cần qua thao tác admin thủ công.</p><h3>Lợi ích cốt lõi</h3><p>- Tiết kiệm 95% thời gian đăng bài.<br>- Đồng bộ nội dung đa kênh tự động.</p>`,
+                cover_image: 'https://images.unsplash.com/photo-1677442136019-21780efad99a'
+            });
+
+            btnQuickAIPublish.innerHTML = '<i class="fa-solid fa-check"></i> Đã Đăng Thành Công 1 Bài Viết Mới!';
+            initDashboard();
+
             setTimeout(() => {
-                const sampleTitles = [
-                    "Xây Dựng Hệ Thống Lead Funnel Tự Động Với AI Agent 2026",
-                    "Bí Quyết Ứng Dụng Midjourney Sáng Tạo Ấn Phẩm Marketing Độc Quyền",
-                    "Cách Tối Ưu Chi Phí Quảng Cáo Facebook Bằng Phân Tích Data Dữ Liệu"
-                ];
-                const randomTitle = sampleTitles[Math.floor(Math.random() * sampleTitles.length)];
-
-                window.HTLAIEngine.publishBlog({
-                    title: randomTitle,
-                    category: 'AI Automation',
-                    content: `<p>Đây là bài viết được AI Agent sáng tạo và tự động ĐĂNG NGAY tức thì lên CSDL website mà không cần qua thao tác admin thủ công.</p><h3>Lợi ích cốt lõi</h3><p>- Tiết kiệm 95% thời gian đăng bài.<br>- Đồng bộ nội dung đa kênh tự động.</p>`,
-                    cover_image: 'https://images.unsplash.com/photo-1677442136019-21780efad99a?auto=format&fit=crop&w=800&q=80'
-                });
-
-                btnQuickAIPublish.innerHTML = '<i class="fa-solid fa-check"></i> Đã Đăng Thành Công 1 Bài Viết Mới!';
-                initDashboard();
-
-                setTimeout(() => {
-                    btnQuickAIPublish.innerHTML = '<i class="fa-solid fa-robot"></i> Tạo & Đăng Bài SEO Ngay Bằng AI';
-                }, 3000);
-            }, 800);
+                btnQuickAIPublish.innerHTML = '<i class="fa-solid fa-robot"></i> Tạo & Đăng Bài SEO Ngay Bằng AI';
+            }, 3000);
         });
     }
 
     // AI API TEST FORM
     const aiApiTestForm = document.getElementById('aiApiTestForm');
     if (aiApiTestForm) {
-        aiApiTestForm.addEventListener('submit', (e) => {
+        aiApiTestForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const prompt = document.getElementById('aiTestPrompt').value;
-            window.HTLAIEngine.publishBlog({
+            await window.HTLAIEngine.publishBlog({
                 title: prompt,
                 category: 'AI Generated',
                 content: `<p>Nội dung tự động hóa dựa trên câu lệnh: <strong>${escapeHtml(prompt)}</strong>.</p>`
@@ -248,28 +247,28 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // UTILITY FUNCTIONS
-    window.updateLeadStatus = function(id, status) {
-        window.HTLDatabase.updateContactStatus(id, status);
+    window.updateLeadStatus = async function(id, status) {
+        await window.HTLDatabase.updateContactStatus(id, status);
         initDashboard();
     };
 
-    window.deleteLead = function(id) {
+    window.deleteLead = async function(id) {
         if (confirm('Bạn có chắc muốn xóa lead này?')) {
-            window.HTLDatabase.deleteContact(id);
+            await window.HTLDatabase.deleteContact(id);
             initDashboard();
         }
     };
 
-    window.deleteBlogArticle = function(id) {
+    window.deleteBlogArticle = async function(id) {
         if (confirm('Bạn có chắc muốn xóa bài viết này?')) {
-            window.HTLDatabase.deleteBlog(id);
+            await window.HTLDatabase.deleteBlog(id);
             initDashboard();
         }
     };
 
-    window.deleteProjectCard = function(id) {
+    window.deleteProjectCard = async function(id) {
         if (confirm('Bạn có chắc muốn xóa dự án này?')) {
-            window.HTLDatabase.deleteProject(id);
+            await window.HTLDatabase.deleteProject(id);
             initDashboard();
         }
     };
