@@ -1,48 +1,47 @@
 /* ============================================
-   DESIGN TOKENS — Space & Astronaut (Futuristic)
+   DESIGN TOKENS — Cinematic Sci-Fi (Industrial Steel)
    ============================================ */
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap');
 
 :root {
-    /* === Colors — Deep Space & Neon === */
-    --bg-primary: #05050A; /* Deep Space Black */
-    --bg-secondary: rgba(20, 20, 35, 0.6); /* Glassmorphism background */
-    --bg-card: rgba(255, 255, 255, 0.03);
-    --bg-card-hover: rgba(255, 255, 255, 0.08);
+    /* === Colors — Cinematic Dark Steel & Fog === */
+    --bg-primary: #0A0D10; /* Very dark steel blue/gray */
+    --bg-secondary: #141A20; /* Slightly lighter industrial gray */
+    --bg-card: rgba(255, 255, 255, 0.1);
+    --bg-card-hover: rgba(255, 255, 255, 0.2);
 
-    --text-primary: #FFFFFF;
-    --text-heading: #FFFFFF;
-    --text-secondary: #B4B4C7;
-    --text-muted: #6C6C86;
+    --text-primary: #FFFFFF; /* Pure White for better readability */
+    --text-heading: #FFFFFF; /* Bright Metallic */
+    --text-secondary: #E0E6ED; /* Brighter secondary text */
+    --text-muted: #B0BEC5;
 
-    /* Accents (Nebula Purple & Starlight Cyan) */
-    --accent-primary: #00F0FF; /* Neon Cyan */
-    --accent-primary-hover: #00C3FF;
-    --accent-secondary: #7000FF; /* Deep Neon Purple */
+    /* Accents (Misty Cyan / Icy Blue) */
+    --accent-primary: #6B95A6; /* Foggy Ice Blue */
+    --accent-primary-hover: #8AB8CC;
+    --accent-secondary: #354B59; /* Dark Military Steel */
     
-    --accent-purple: #7000FF;
-    --accent-violet: #8A2BE2;
-    --accent-cyan: #00F0FF;
-    --accent-green: #39FF14;
+    --accent-purple: #6B95A6;
+    --accent-violet: #8AB8CC;
+    --accent-cyan: #A5C8D9;
+    --accent-green: #6B95A6;
     
-    --gradient-brand: linear-gradient(135deg, #00F0FF 0%, #7000FF 100%);
-    --border-color: rgba(255, 255, 255, 0.1);
+    --gradient-brand: linear-gradient(135deg, #A5C8D9 0%, #6B95A6 100%);
+    --border-color: rgba(107, 149, 166, 0.3);
 
-    /* === Shadows — Neon Glows === */
-    --shadow-card: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-    --shadow-card-hover: 0 8px 32px 0 rgba(0, 240, 255, 0.15);
-    --glow-primary: 0 0 20px rgba(0, 240, 255, 0.5);
-    --glow-secondary: 0 0 20px rgba(112, 0, 255, 0.5);
+    /* === Shadows — Harsh & Industrial === */
+    --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.8);
+    --shadow-card-hover: 0 15px 40px rgba(0, 0, 0, 0.9);
+    --glow-primary: 0 0 15px rgba(107, 149, 166, 0.2);
 
     /* === Typography === */
-    --font-heading: 'Space Grotesk', sans-serif;
-    --font-body: 'Space Grotesk', sans-serif;
+    --font-heading: 'Oswald', sans-serif; /* Tall, cinematic, industrial */
+    --font-body: 'Inter', sans-serif;
 
-    /* Futuristic Sizing */
-    --fs-display: clamp(2.5rem, 6vw, 4rem);
-    --fs-h1: clamp(2rem, 4vw, 3rem);
-    --fs-h2: clamp(1.5rem, 3vw, 2.2rem);
-    --fs-h3: clamp(1.2rem, 2vw, 1.5rem);
+    /* Cinematic Sizing */
+    --fs-display: clamp(3rem, 8vw, 6rem);
+    --fs-h1: clamp(2.5rem, 5vw, 4rem);
+    --fs-h2: clamp(1.8rem, 3.5vw, 2.8rem);
+    --fs-h3: clamp(1.3rem, 2.5vw, 1.8rem);
     --fs-body: 16px;
     --fs-small: 14px;
     --fs-xs: 12px;
@@ -52,8 +51,8 @@
     --space-sm: 1rem;
     --space-md: 1.5rem;
     --space-lg: 2rem;
-    --space-xl: 3rem;
-    --space-2xl: 5rem;
+    --space-xl: 3.5rem;
+    --space-2xl: 6rem;
     --space-section: 80px;
 
     /* === Layout === */
@@ -61,15 +60,15 @@
     --container-narrow: 800px;
     --container-padding: 20px;
 
-    /* === Border Radius === */
-    --radius-sm: 8px;
-    --radius-md: 16px;
-    --radius-lg: 24px;
+    /* === Border Radius — Sharp Industrial Edge === */
+    --radius-sm: 2px;
+    --radius-md: 4px;
+    --radius-lg: 8px;
     --radius-round: 50%;
-    --radius-pill: 50px;
+    --radius-pill: 4px; /* Even pills are somewhat square in military/industrial sci-fi */
 
     /* === Transitions === */
-    --transition-fast: 0.2s ease-in-out;
-    --transition-base: 0.3s ease-in-out;
-    --transition-slow: 0.5s ease-in-out;
+    --transition-fast: 0.2s ease;
+    --transition-base: 0.3s ease;
+    --transition-slow: 0.5s ease;
 }

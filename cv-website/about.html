@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="css/pages.css">
     <link rel="stylesheet" href="css/responsive.css">
 </head>
-<body class="page-transition">
+<body class="page-transition bg-about">
 
     <!-- NAVBAR -->
     <header class="navbar">
@@ -38,14 +38,20 @@
         </div>
     </header>
 
-    <!-- MAIN CONTENT -->
+    <!-- ABOUT -->
     <main>
-        <section class="section container" id="about" style="padding-top: 8rem;">
-
-            <!-- Intro: Avatar + Text -->
-            <div class="about-intro animate-on-scroll">
-                <img class="about-avatar" src="assets/images/avatar.jpg" alt="Hoàng Thế Long" loading="lazy">
-                <div class="about-text">
+        <section class="about section-padding" id="about">
+            <div class="container">
+                <h1 class="section-title animate-on-scroll">Về <span class="text-gradient">Tôi</span></h1>
+                
+                <!-- Intro: Avatar + Text -->
+                <div class="about-intro animate-on-scroll" style="position: relative; z-index: 2;">
+                    <!-- Thêm hiệu ứng glowing ring đằng sau avatar -->
+                    <div style="position: relative;">
+                        <img class="about-avatar" src="assets/images/avatar_nobg.png" alt="Hoàng Thế Long" loading="lazy">
+                        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 50%; box-shadow: 0 0 50px rgba(0, 240, 255, 0.5); z-index: 1;"></div>
+                    </div>
+                    <div class="about-text">
                     <h2>Xin chào, tôi là <span class="text-gradient">Hoàng Thế Long</span></h2>
                     <p>
                         Tôi là một người trẻ đam mê Digital Marketing và luôn tìm cách ứng dụng AI, dữ liệu vào công việc. Hiện tại tôi đang theo học chương trình Digital Marketing chuyên nghiệp tại Học viện Kstudy với định hướng AI & Automation.
