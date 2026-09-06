@@ -1,6 +1,60 @@
 /* ============================================
-   PAGES — Space & Astronaut (Futuristic)
+   PAGES — Cinematic Sci-Fi (Industrial Steel)
    ============================================ */
+
+/* ========== FLOATING SCI-FI ELEMENTS ========== */
+.space-element {
+    position: absolute;
+    z-index: 5;
+    pointer-events: none;
+    mix-blend-mode: screen;
+    opacity: 0.85;
+}
+.ship-1 {
+    width: 320px;
+    animation: float-ship 20s ease-in-out infinite;
+    filter: drop-shadow(0 0 20px rgba(107, 149, 166, 0.6));
+}
+.astro-1 {
+    width: 250px;
+    animation: float-astro 15s ease-in-out infinite reverse;
+    filter: drop-shadow(0 0 25px rgba(255, 255, 255, 0.4));
+}
+.ship-home { top: 15%; right: 5%; }
+.astro-home { bottom: 15%; left: 10%; }
+.ship-about { top: -50px; right: -50px; }
+.astro-about { bottom: -20px; left: -20px; }
+
+@keyframes float-ship {
+    0% { transform: translate(0, 0) rotate(5deg) scale(1); }
+    50% { transform: translate(-30px, 40px) rotate(-5deg) scale(1.05); }
+    100% { transform: translate(0, 0) rotate(5deg) scale(1); }
+}
+@keyframes float-astro {
+    0% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-40px) rotate(15deg); }
+    100% { transform: translateY(0) rotate(0deg); }
+}
+
+/* ========== PAGE BACKGROUNDS ========== */
+.bg-home {
+    background-image: linear-gradient(rgba(10, 20, 30, 0.1), rgba(0, 0, 0, 0.4)), url('../phim-khoa-hoc-vien-tuong-1.jpg');
+}
+.bg-about {
+    background-image: linear-gradient(rgba(10, 20, 30, 0.2), rgba(0, 0, 0, 0.5)), url('../phim-khoa-hoc-vien-tuong-hay-nhat-moi-thoi-dai-17-e1626967107168.jpg');
+}
+.bg-education {
+    background-image: linear-gradient(rgba(10, 20, 30, 0.2), rgba(0, 0, 0, 0.5)), url('../phim-khoa-hoc-vien-tuong-hay-nhat-moi-thoi-dai-18-e1626967134105.jpg');
+}
+.bg-skills {
+    background-image: linear-gradient(rgba(10, 20, 30, 0.2), rgba(0, 0, 0, 0.5)), url('../phim-khoa-hoc-vien-tuong-10-1.jpg');
+}
+.bg-experience {
+    background-image: linear-gradient(rgba(10, 20, 30, 0.2), rgba(0, 0, 0, 0.5)), url('../harper-bazaar-phim-khoa-hoc-vien-tuong-hay-nhat-moi-thoi-dai-20.jpg');
+}
+.bg-contact {
+    background-image: linear-gradient(rgba(10, 20, 30, 0.2), rgba(0, 0, 0, 0.5)), url('../phim-khoa-hoc-vien-tuong-2-1.jpg');
+}
 
 /* ========== HERO SECTION ========== */
 .hero {
@@ -13,27 +67,14 @@
     overflow: hidden;
 }
 
-/* Floating Astronaut Background */
+/* Subtle atmospheric particles/mist behind hero */
 .hero::before {
     content: '';
     position: absolute;
-    top: 15%;
-    right: 5%;
-    width: 600px;
-    height: 600px;
-    background: url('https://images.unsplash.com/photo-1614729939124-03290b56c9ce?q=80&w=800') center/contain no-repeat;
-    opacity: 0.15;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(circle at 70% 50%, rgba(107, 149, 166, 0.05), transparent 60%);
     z-index: 0;
-    animation: float-space 20s ease-in-out infinite;
-    filter: drop-shadow(0 0 20px rgba(0, 240, 255, 0.5));
-    mix-blend-mode: screen;
-}
-
-@keyframes float-space {
-    0% { transform: translate(0, 0) rotate(0deg); }
-    33% { transform: translate(-30px, -50px) rotate(5deg); }
-    66% { transform: translate(20px, 40px) rotate(-3deg); }
-    100% { transform: translate(0, 0) rotate(0deg); }
+    pointer-events: none;
 }
 
 .hero-content {
@@ -43,7 +84,7 @@
     padding: 60px var(--container-padding);
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 50px;
+    gap: 60px;
     align-items: center;
     position: relative;
     z-index: 2;
@@ -56,11 +97,11 @@
 }
 
 .hero-greeting {
-    font-size: 16px;
-    font-weight: 500;
+    font-family: var(--font-heading);
+    font-size: 18px;
     color: var(--accent-primary);
     text-transform: uppercase;
-    letter-spacing: 4px;
+    letter-spacing: 5px;
     display: flex;
     align-items: center;
     gap: 15px;
@@ -68,39 +109,42 @@
 .hero-greeting::before {
     content: '';
     display: block;
-    width: 40px;
-    height: 2px;
+    width: 50px;
+    height: 1px;
     background: var(--accent-primary);
-    box-shadow: var(--glow-primary);
 }
 
 .hero-name {
     font-family: var(--font-heading);
     font-size: var(--fs-display);
     font-weight: 700;
-    color: #fff;
-    line-height: 1.1;
-    text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+    color: var(--text-heading);
+    line-height: 1;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+    text-shadow: 
+        1px 1px 0px rgba(255, 255, 255, 0.3),
+        -1px -1px 0px rgba(0, 0, 0, 0.8),
+        0 15px 30px rgba(0, 0, 0, 0.9);
 }
 
 .hero-role {
-    font-size: 24px;
+    font-family: var(--font-heading);
+    font-size: 32px;
     font-weight: 500;
-    background: var(--gradient-brand);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: var(--text-secondary);
     letter-spacing: 2px;
+    text-transform: uppercase;
 }
 
 .typing-cursor {
     display: inline-block;
-    width: 3px;
-    height: 1em;
-    background: var(--accent-primary);
+    width: 4px;
+    height: 0.8em;
+    background: var(--text-primary);
     margin-left: 5px;
     animation: blink 1s step-end infinite;
-    vertical-align: text-bottom;
-    box-shadow: var(--glow-primary);
+    vertical-align: baseline;
 }
 
 @keyframes blink {
@@ -109,10 +153,13 @@
 }
 
 .hero-desc {
-    font-size: 16px;
-    color: var(--text-secondary);
-    line-height: 1.8;
+    font-size: 18px;
+    color: var(--text-primary);
+    line-height: 1.6;
     max-width: 90%;
+    font-weight: 500;
+    margin-top: 10px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 1), 0 4px 20px rgba(0, 0, 0, 0.8);
 }
 
 /* Actions Box in Hero */
@@ -124,36 +171,31 @@
 }
 
 .hero-action-btn {
-    padding: 12px 30px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: var(--radius-pill);
-    color: #fff;
+    padding: 16px 35px;
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    font-family: var(--font-heading);
     font-weight: 500;
-    font-size: 14px;
+    font-size: 16px;
     text-transform: uppercase;
-    letter-spacing: 2px;
-    transition: all 0.3s;
+    letter-spacing: 3px;
+    transition: all 0.2s;
     display: flex;
     align-items: center;
-    gap: 10px;
-    backdrop-filter: blur(5px);
+    gap: 12px;
 }
 .hero-action-btn:first-child {
-    background: var(--accent-primary);
+    background: var(--text-primary);
     color: #000;
-    border-color: var(--accent-primary);
-    box-shadow: var(--glow-primary);
+    border-color: var(--text-primary);
 }
 .hero-action-btn:hover {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: #fff;
+    background: rgba(255, 255, 255, 0.05);
 }
 .hero-action-btn:first-child:hover {
     background: #fff;
-    border-color: #fff;
-    box-shadow: 0 0 30px #fff;
-    color: #000;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
 }
 
 .hero-visual {
@@ -163,38 +205,52 @@
     align-items: center;
 }
 
+/* Thêm vầng hào quang đằng sau ảnh người (Backlight) giống trang About */
+.hero-visual::before {
+    content: '';
+    position: absolute;
+    top: 10%; left: 10%; right: 10%; bottom: 10%;
+    background: radial-gradient(circle, rgba(107, 149, 166, 0.15) 0%, transparent 70%);
+    border-radius: 50%;
+    z-index: 1;
+    box-shadow: 0 0 80px rgba(107, 149, 166, 0.4);
+}
+
 .hero-avatar {
     width: 100%;
-    max-width: 420px;
-    height: 520px;
-    object-fit: cover;
-    border-radius: var(--radius-lg);
-    box-shadow: var(--glow-primary);
-    transition: all 0.5s;
+    max-width: 450px;
+    height: auto;
+    object-fit: contain;
     position: relative;
     z-index: 2;
-    border: 2px solid rgba(0, 240, 255, 0.3);
+    transition: all 0.5s;
+    border-radius: 0;
+    filter: drop-shadow(0 0 20px rgba(107, 149, 166, 0.6));
+    -webkit-mask-image: linear-gradient(to bottom, black 75%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 75%, transparent 100%);
+    transform-origin: bottom center;
 }
 
 .hero-avatar:hover {
-    transform: translateY(-10px) scale(1.02);
-    box-shadow: 0 0 50px rgba(0, 240, 255, 0.6);
-    border-color: var(--accent-primary);
+    transform: translateY(-5px) scale(1.03);
+    filter: drop-shadow(0 0 30px rgba(107, 149, 166, 0.9));
 }
 
-/* Sci-fi Decorative Element around avatar */
-.hero-visual::after {
-    content: '';
-    position: absolute;
-    width: 105%;
-    height: 105%;
-    border: 1px dashed rgba(112, 0, 255, 0.5);
-    border-radius: var(--radius-lg);
-    z-index: 1;
-    animation: rotate-border 20s linear infinite;
+/* ========== ABOUT PAGE SPECIFIC ========== */
+.about-avatar {
+    width: 100%;
+    max-width: 380px;
+    height: auto;
+    object-fit: contain;
+    position: relative;
+    z-index: 2;
+    border-radius: 0;
+    transition: transform 0.4s;
+    filter: drop-shadow(0 0 20px rgba(107, 149, 166, 0.4));
+    -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+    transform-origin: bottom center;
 }
-
-@keyframes rotate-border {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
+.about-avatar:hover {
+    transform: scale(1.05);
 }
