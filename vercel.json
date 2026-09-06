@@ -1,0 +1,17 @@
+{
+  "rewrites": [
+    { "source": "/", "destination": "/cv-website/index.html" },
+    { "source": "/about", "destination": "/cv-website/about.html" },
+    { "source": "/about.html", "destination": "/cv-website/about.html" },
+    { "source": "/education", "destination": "/cv-website/education.html" },
+    { "source": "/education.html", "destination": "/cv-website/education.html" },
+    { "source": "/experience", "destination": "/cv-website/experience.html" },
+    { "source": "/experience.html", "destination": "/cv-website/experience.html" },
+    { "source": "/skills", "destination": "/cv-website/skills.html" },
+    { "source": "/skills.html", "destination": "/cv-website/skills.html" },
+    { "source": "/contact", "destination": "/cv-website/contact.html" },
+    { "source": "/contact.html", "destination": "/cv-website/contact.html" },
+    { "source": "/wolf", "destination": "/cv-website/wolf.html" },
+    { "source": "/wolf.html", "destination": "/cv-website/wolf.html" }
+  ]
+}
