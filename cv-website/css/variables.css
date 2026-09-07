@@ -7,8 +7,8 @@
     /* === Colors — Cinematic Dark Steel & Fog === */
     --bg-primary: #0A0D10; /* Very dark steel blue/gray */
     --bg-secondary: #141A20; /* Slightly lighter industrial gray */
-    --bg-card: rgba(255, 255, 255, 0.1);
-    --bg-card-hover: rgba(255, 255, 255, 0.2);
+    --bg-card: rgba(10, 15, 25, 0.7);
+    --bg-card-hover: rgba(10, 15, 25, 0.85);
 
     --text-primary: #FFFFFF; /* Pure White for better readability */
     --text-heading: #FFFFFF; /* Bright Metallic */

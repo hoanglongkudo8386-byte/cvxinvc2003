@@ -38,22 +38,22 @@
 
 /* ========== PAGE BACKGROUNDS ========== */
 .bg-home {
-    background-image: linear-gradient(rgba(10, 20, 30, 0.1), rgba(0, 0, 0, 0.4)), url('../phim-khoa-hoc-vien-tuong-1.jpg');
+    background-image: linear-gradient(rgba(5, 10, 15, 0.8), rgba(0, 0, 0, 0.95)), url('../phim-khoa-hoc-vien-tuong-1.jpg');
 }
 .bg-about {
-    background-image: linear-gradient(rgba(10, 20, 30, 0.2), rgba(0, 0, 0, 0.5)), url('../phim-khoa-hoc-vien-tuong-hay-nhat-moi-thoi-dai-17-e1626967107168.jpg');
+    background-image: linear-gradient(rgba(5, 10, 15, 0.85), rgba(0, 0, 0, 0.95)), url('../phim-khoa-hoc-vien-tuong-hay-nhat-moi-thoi-dai-17-e1626967107168.jpg');
 }
 .bg-education {
-    background-image: linear-gradient(rgba(10, 20, 30, 0.2), rgba(0, 0, 0, 0.5)), url('../phim-khoa-hoc-vien-tuong-hay-nhat-moi-thoi-dai-18-e1626967134105.jpg');
+    background-image: linear-gradient(rgba(5, 10, 15, 0.85), rgba(0, 0, 0, 0.95)), url('../phim-khoa-hoc-vien-tuong-hay-nhat-moi-thoi-dai-18-e1626967134105.jpg');
 }
 .bg-skills {
-    background-image: linear-gradient(rgba(10, 20, 30, 0.2), rgba(0, 0, 0, 0.5)), url('../phim-khoa-hoc-vien-tuong-10-1.jpg');
+    background-image: linear-gradient(rgba(5, 10, 15, 0.85), rgba(0, 0, 0, 0.95)), url('../phim-khoa-hoc-vien-tuong-10-1.jpg');
 }
 .bg-experience {
-    background-image: linear-gradient(rgba(10, 20, 30, 0.2), rgba(0, 0, 0, 0.5)), url('../harper-bazaar-phim-khoa-hoc-vien-tuong-hay-nhat-moi-thoi-dai-20.jpg');
+    background-image: linear-gradient(rgba(5, 10, 15, 0.85), rgba(0, 0, 0, 0.95)), url('../harper-bazaar-phim-khoa-hoc-vien-tuong-hay-nhat-moi-thoi-dai-20.jpg');
 }
 .bg-contact {
-    background-image: linear-gradient(rgba(10, 20, 30, 0.2), rgba(0, 0, 0, 0.5)), url('../phim-khoa-hoc-vien-tuong-2-1.jpg');
+    background-image: linear-gradient(rgba(5, 10, 15, 0.85), rgba(0, 0, 0, 0.95)), url('../phim-khoa-hoc-vien-tuong-2-1.jpg');
 }
 
 /* ========== HERO SECTION ========== */
