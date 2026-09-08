@@ -33,7 +33,7 @@ class HTLDatabaseManager {
             });
             const data = await res.json();
             if (data.access_token) {
-                localStorage.setItem('htl_access_token', data.access_token);
+                localStorage.setItem('htl_access_token', data.access_token); localStorage.setItem('htl_admin_email', email);
                 return { success: true };
             }
             return { success: false, message: data.error_description || 'Sai thông tin đăng nhập' };
@@ -44,7 +44,7 @@ class HTLDatabaseManager {
     }
 
     logout() {
-        localStorage.removeItem('htl_access_token');
+        localStorage.removeItem('htl_access_token'); localStorage.removeItem('htl_admin_email');
         window.location.reload();
     }
 
@@ -217,7 +217,37 @@ class HTLDatabaseManager {
         }
     }
 
-    // --- HELPER UTILS ---
+    
+    // --- TEAM MEMBERS ---
+    async getTeamMembers() {
+        try {
+            const res = await fetch("https://gvigrkrlymrllfatuinw.supabase.co/rest/v1/team_members?select=*&order=created_at.desc", { headers: this.headers });
+            if(!res.ok) return [];
+            return await res.json();
+        } catch(e) { return []; }
+    }
+
+    // --- AUDIT LOGS ---
+    async getAuditLogs() {
+        try {
+            const res = await fetch("https://gvigrkrlymrllfatuinw.supabase.co/rest/v1/audit_logs?select=*&order=created_at.desc&limit=50", { headers: this.headers });
+            if(!res.ok) return [];
+            return await res.json();
+        } catch(e) { return []; }
+    }
+
+    async logAction(action, details) {
+        try {
+            // We assume email is stored in localStorage or decoded from JWT. For simplicity:
+            const email = localStorage.getItem('htl_admin_email') || 'Admin';
+            await fetch("https://gvigrkrlymrllfatuinw.supabase.co/rest/v1/audit_logs", {
+                method: 'POST',
+                headers: this.headers,
+                body: JSON.stringify({ action, details, user_email: email })
+            });
+        } catch(e) {}
+    }
+// --- HELPER UTILS ---
     slugify(text) {
         return text.toString().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[đĐ]/g, 'd').replace(/\s+/g, '-').replace(/[^\w\-]+/g, '').replace(/\-\-+/g, '-').replace(/^-+/, '').replace(/-+$/, '');
     }
@@ -254,6 +284,7 @@ class HTLDatabaseManager {
 }
 
 window.HTLDatabase = new HTLDatabaseManager();
+
 
 
 

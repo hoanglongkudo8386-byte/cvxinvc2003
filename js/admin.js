@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
         renderStats();
         renderLeads();
         renderBlogs();
-        renderProjects();
+        renderProjects(); renderTeam(); renderAudit();
     }
 
     // RENDER THONG KE
@@ -143,7 +143,21 @@ document.addEventListener('DOMContentLoaded', () => {
             `).join('');
     }
 
-    // RENDER PROJECTS
+    
+    async function renderTeam() {
+        const team = await window.HTLDatabase.getTeamMembers();
+        const table = document.getElementById('teamTable');
+        if(!table) return;
+        table.innerHTML = team.length === 0 ? '<tr><td colspan="5" style="text-align:center;">Chưa có nhân viên nào. Hãy thêm trong Supabase!</td></tr>' : team.map(u => \<tr><td><strong>\</strong></td><td>\</td><td><span class="status-badge badge-new">\</span></td><td><span class="status-badge badge-completed">\</span></td><td><button class="btn-admin btn-admin-danger" onclick="alert('Tính năng khóa đang phát triển')">Khóa</button></td></tr>\).join('');
+    }
+
+    async function renderAudit() {
+        const logs = await window.HTLDatabase.getAuditLogs();
+        const table = document.getElementById('auditTable');
+        if(!table) return;
+        table.innerHTML = logs.length === 0 ? '<tr><td colspan="4" style="text-align:center;">Chưa có hoạt động nào</td></tr>' : logs.map(l => \<tr><td>\</td><td><strong>\</strong></td><td><span class="status-badge badge-processing">\</span></td><td>\</td></tr>\).join('');
+    }
+// RENDER PROJECTS
     async function renderProjects() {
         const projects = await window.HTLDatabase.getProjects();
         const projectsTable = document.getElementById('projectsTable');
@@ -197,7 +211,7 @@ document.addEventListener('DOMContentLoaded', () => {
             await window.HTLAIEngine.publishBlog({ title, category, cover_image: image_url, content, slug, meta_title, meta_description });
             createBlogForm.reset();
             if (quillBlog) quillBlog.setContents([]);
-            alert('Bài viết đã được xuất bản ĐĂNG NGAY thành công!');
+            alert('Bài viết đã được xuất bản thành công!'); window.HTLDatabase.logAction('Đăng Bài viết', 'Tiêu đề: ' + title);
             initDashboard();
         });
     }
@@ -220,7 +234,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             await window.HTLAIEngine.publishProject({ title, category, metric_value, metric_label, image_url, description, slug, meta_title, meta_description });
             createProjectForm.reset();
-            alert('Dự án Portfolio đã được đăng thành công!');
+            alert('Dự án Portfolio đã được đăng thành công!'); window.HTLDatabase.logAction('Đăng Dự án', 'Tiêu đề: ' + title);
             initDashboard();
         });
     }
@@ -272,27 +286,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // UTILITY FUNCTIONS
     window.updateLeadStatus = async function(id, status) {
-        await window.HTLDatabase.updateContactStatus(id, status);
+        await window.HTLDatabase.updateContactStatus(id, status); window.HTLDatabase.logAction('Cập nhật Liên hệ', 'Chuyển trạng thái: ' + status);
         initDashboard();
     };
 
     window.deleteLead = async function(id) {
         if (confirm('Bạn có chắc muốn xóa lead này?')) {
-            await window.HTLDatabase.deleteContact(id);
+            await window.HTLDatabase.deleteContact(id); window.HTLDatabase.logAction('Xóa Liên hệ', 'ID: ' + id);
             initDashboard();
         }
     };
 
     window.deleteBlogArticle = async function(id) {
         if (confirm('Bạn có chắc muốn xóa bài viết này?')) {
-            await window.HTLDatabase.deleteBlog(id);
+            await window.HTLDatabase.deleteBlog(id); window.HTLDatabase.logAction('Xóa Bài viết', 'ID: ' + id);
             initDashboard();
         }
     };
 
     window.deleteProjectCard = async function(id) {
         if (confirm('Bạn có chắc muốn xóa dự án này?')) {
-            await window.HTLDatabase.deleteProject(id);
+            await window.HTLDatabase.deleteProject(id); window.HTLDatabase.logAction('Xóa Dự án', 'ID: ' + id);
             initDashboard();
         }
     };
@@ -309,6 +323,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
     }
 });
+
 
 
 
