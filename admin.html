@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
@@ -77,7 +77,7 @@
                 <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 0.2rem;">Quản lý dữ liệu & Tự động hóa nội dung bằng AI</p>
             </div>
             <div class="user-badge">
-                <div class="user-avatar">L</div>
+                
                 <div>
                     <div style="font-size: 0.85rem; font-weight: 600;" class="user-name">Hoàng Thế Long</div>
                     <div style="font-size: 0.75rem; color: var(--accent-green);">● AI Publisher Active</div>
@@ -139,7 +139,7 @@
                         <i class="fa-solid fa-file-excel"></i> Xuất File CSV / Excel
                     </button>
                 </div>
-                <table class="admin-table">
+                <div class="table-responsive"><table class="admin-table">
                     <thead>
                         <tr>
                             <th>Họ và tên</th>
@@ -152,7 +152,7 @@
                     <tbody id="recentLeadsTable">
                         <!-- Render via JS -->
                     </tbody>
-                </table>
+                </table></div>
             </div>
         </section>
 
@@ -165,7 +165,7 @@
                         <i class="fa-solid fa-download"></i> Tải File Excel
                     </button>
                 </div>
-                <table class="admin-table">
+                <div class="table-responsive"><table class="admin-table">
                     <thead>
                         <tr>
                             <th>Họ và tên</th>
@@ -179,7 +179,7 @@
                     <tbody id="fullLeadsTable">
                         <!-- Render via JS -->
                     </tbody>
-                </table>
+                </table></div>
             </div>
         </section>
 
@@ -218,7 +218,7 @@
                 <div class="card-header">
                     <h2 class="card-title">Danh Sách Bài Viết Đã Đăng</h2>
                 </div>
-                <table class="admin-table">
+                <div class="table-responsive"><table class="admin-table">
                     <thead>
                         <tr>
                             <th>Tiêu đề</th>
@@ -231,7 +231,7 @@
                     <tbody id="blogsTable">
                         <!-- Render via JS -->
                     </tbody>
-                </table>
+                </table></div>
             </div>
         </section>
 
@@ -285,7 +285,7 @@
                 <div class="card-header">
                     <h2 class="card-title">Danh Sách Dự Án Đã Đăng</h2>
                 </div>
-                <table class="admin-table">
+                <div class="table-responsive"><table class="admin-table">
                     <thead>
                         <tr>
                             <th>Tên dự án</th>
@@ -297,7 +297,7 @@
                     <tbody id="projectsTable">
                         <!-- Render via JS -->
                     </tbody>
-                </table>
+                </table></div>
             </div>
         </section>
 
@@ -341,3 +341,4 @@ HTLAIEngine.publishBlog({<br>
     <script src="js/admin.js"></script>
 </body>
 </html>
+
