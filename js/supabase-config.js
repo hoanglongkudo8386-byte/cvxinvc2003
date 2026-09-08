@@ -7,6 +7,7 @@ const SUPABASE_CONFIG = {
     url: 'https://gvigrkrlymrllfatuinw.supabase.co',
     anonKey: 'sb_publishable_VY5--I1yacEERQKzaMALeg_mNuo31Cq',
     get headers() {
+        const token = localStorage.getItem('htl_access_token');
         return {
             'apikey': this.anonKey,
             'Authorization': `Bearer ${this.anonKey}`,
@@ -21,7 +22,36 @@ class HTLDatabaseManager {
         console.log('✅ HTL Database Initialized (Supabase Connected)');
     }
 
-    // --- LEADS / CONTACTS ---
+    
+    // --- AUTHENTICATION ---
+    async login(email, password) {
+        try {
+            const res = await fetch("https://gvigrkrlymrllfatuinw.supabase.co/auth/v1/token?grant_type=password", {
+                method: 'POST',
+                headers: { 'apikey': SUPABASE_CONFIG.anonKey, 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password })
+            });
+            const data = await res.json();
+            if (data.access_token) {
+                localStorage.setItem('htl_access_token', data.access_token);
+                return { success: true };
+            }
+            return { success: false, message: data.error_description || 'Sai thông tin đăng nhập' };
+        } catch (e) {
+            console.error('Lỗi đăng nhập:', e);
+            return { success: false, message: 'Lỗi máy chủ' };
+        }
+    }
+
+    logout() {
+        localStorage.removeItem('htl_access_token');
+        window.location.reload();
+    }
+
+    isAuthenticated() {
+        return !!localStorage.getItem('htl_access_token');
+    }
+// --- LEADS / CONTACTS ---
     async getContacts() {
         try {
             const res = await fetch(`${SUPABASE_CONFIG.url}/rest/v1/contacts?select=*&order=created_at.desc`, { headers: SUPABASE_CONFIG.headers });
@@ -224,6 +254,7 @@ class HTLDatabaseManager {
 }
 
 window.HTLDatabase = new HTLDatabaseManager();
+
 
 
 

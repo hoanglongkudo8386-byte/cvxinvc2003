@@ -29,15 +29,22 @@
         <div class="login-card">
             <div class="login-logo">HTL ADMIN</div>
             <p class="login-title">Hệ Thống Quản Trị & AI Engine</p>
+            
             <form id="loginForm">
                 <div class="form-group">
-                    <label class="form-label" for="adminPassword">Mật khẩu quản trị</label>
-                    <input type="password" id="adminPassword" class="admin-input" placeholder="Nhập mật khẩu (Mặc định: admin123)" required>
+                    <label class="form-label" for="adminEmail">Email quản trị</label>
+                    <input type="email" id="adminEmail" class="admin-input" placeholder="admin@hoangthelong.com" required>
                 </div>
-                <button type="submit" class="btn-admin btn-admin-primary">
+                <div class="form-group">
+                    <label class="form-label" for="adminPassword">Mật khẩu</label>
+                    <input type="password" id="adminPassword" class="admin-input" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="btn-admin btn-admin-primary" style="width: 100%;">
                     Đăng Nhập Quản Trị <i class="fa-solid fa-right-to-bracket"></i>
                 </button>
+                <div id="loginError" style="color: var(--danger); font-size: 0.85rem; margin-top: 10px; display: none;">Sai email hoặc mật khẩu!</div>
             </form>
+
         </div>
     </div>
 
@@ -64,11 +71,16 @@
                 <a href="#ai-engine"><i class="fa-solid fa-wand-magic-sparkles"></i> <span>AI Content Engine</span></a>
             </li>
         </ul>
+        
         <div class="sidebar-footer">
-            <a href="index.html" class="btn-admin btn-admin-danger" style="width: 100%; font-size: 0.85rem;" target="_blank">
-                <i class="fa-solid fa-globe"></i> <span>Xem Trang Web</span>
+            <button id="btnLogout" class="btn-admin btn-admin-danger" style="width: 100%; font-size: 0.85rem; margin-bottom: 10px; justify-content: center;">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i> Đăng xuất
+            </button>
+            <a href="index.html" class="btn-admin btn-admin-primary" style="width: 100%; font-size: 0.85rem; justify-content: center;" target="_blank">
+                <i class="fa-solid fa-globe"></i> Xem Trang Web
             </a>
         </div>
+
     </aside>
 
     <!-- 3. NOI DUNG CHINH -->
@@ -350,6 +362,7 @@ HTLAIEngine.publishBlog({<br>
     <script src="js/admin.js"></script>
 </body>
 </html>
+
 
 
 
