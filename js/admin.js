@@ -9,22 +9,35 @@ document.addEventListener('DOMContentLoaded', () => {
     const adminPasswordInput = document.getElementById('adminPassword');
 
     // Kiểm tra session đã đăng nhập chưa
-    if (sessionStorage.getItem('htl_admin_logged') === 'true') {
+    
+    const loginError = document.getElementById('loginError');
+    if (window.HTLDatabase.isAuthenticated()) {
         loginScreen.style.display = 'none';
+        adminMain.style.display = 'flex';
         initDashboard();
     }
-
-    loginForm.addEventListener('submit', (e) => {
+    loginForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-        const pass = adminPasswordInput.value.trim();
-        if (pass === 'admin123' || pass === 'admin' || pass === '123456') {
-            sessionStorage.setItem('htl_admin_logged', 'true');
+        const email = document.getElementById('adminEmail').value;
+        const pwd = document.getElementById('adminPassword').value;
+        const btn = loginForm.querySelector('button');
+        const originalText = btn.innerHTML;
+        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Đang xử lý...';
+        const res = await window.HTLDatabase.login(email, pwd);
+        if (res.success) {
             loginScreen.style.display = 'none';
+            adminMain.style.display = 'flex';
             initDashboard();
         } else {
-            alert('Mật khẩu quản trị không chính xác!');
+            if (loginError) { loginError.textContent = res.message; loginError.style.display = 'block'; } else { alert(res.message); }
+            btn.innerHTML = originalText;
         }
     });
+    const btnLogout = document.getElementById('btnLogout');
+    if (btnLogout) {
+        btnLogout.addEventListener('click', () => { window.HTLDatabase.logout(); });
+    }
+
 
     // 2. CHUYEN TAB SIDEBAR
     const menuItems = document.querySelectorAll('.menu-item');
@@ -323,6 +336,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
     }
 });
+
 
 
 
