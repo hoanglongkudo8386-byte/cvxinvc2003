@@ -82,7 +82,7 @@ class HTLDatabaseManager {
     // --- BLOGS ---
     async getBlogBySlug(slug) {
         try {
-            const res = await fetch(${SUPABASE_CONFIG.url}/rest/v1/blogs?slug=eq.&select=*&limit=1, { headers: SUPABASE_CONFIG.headers });
+            const res = await fetch("https://gvigrkrlymrllfatuinw.supabase.co/rest/v1/blogs?slug=eq." + slug + "&select=*&limit=1", { headers: SUPABASE_CONFIG.headers });
             const data = await res.json();
             return data.length > 0 ? data[0] : null;
         } catch (e) { console.error('Lỗi lấy bài viết:', e); return null; }
@@ -224,5 +224,8 @@ class HTLDatabaseManager {
 }
 
 window.HTLDatabase = new HTLDatabaseManager();
+
+
+
 
 
