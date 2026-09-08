@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Hoàng Thế Long Website - Supabase REST API Data Abstraction Layer
  * Đã kết nối với Database Supabase thực tế.
  */
@@ -101,6 +101,8 @@ class HTLDatabaseManager {
             image_url: blogData.image_url || 'https://images.unsplash.com/photo-1677442136019-21780efad99a',
             published_at: blogData.published_at || new Date().toISOString().split('T')[0],
             status: blogData.status || 'published',
+            meta_title: blogData.meta_title || '',
+            meta_description: blogData.meta_description || '',
             views: blogData.views || 1
         };
 
@@ -147,7 +149,10 @@ class HTLDatabaseManager {
             image_url: projectData.image_url || 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8',
             description: projectData.description || '',
             metric_value: projectData.metric_value || '+100%',
-            metric_label: projectData.metric_label || 'Tăng trưởng'
+            metric_label: projectData.metric_label || 'Tăng trưởng',
+            slug: projectData.slug || this.slugify(projectData.title || 'du-an-moi'),
+            meta_title: projectData.meta_title || '',
+            meta_description: projectData.meta_description || ''
         };
 
         try {
@@ -211,3 +216,4 @@ class HTLDatabaseManager {
 }
 
 window.HTLDatabase = new HTLDatabaseManager();
+

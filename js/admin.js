@@ -175,7 +175,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // FORM THEM BLOG THU CONG
+    
+    // UTILS SLUG
+    function generateSlug(text) { return text.toString().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[đĐ]/g, 'd').replace(/\s+/g, '-').replace(/[^\w\-]+/g, '').replace(/\-\-+/g, '-').replace(/^-+/, '').replace(/-+$/, ''); }
+    if (document.getElementById('blogTitle') && document.getElementById('blogSlug')) { document.getElementById('blogTitle').addEventListener('input', function(e) { document.getElementById('blogSlug').value = generateSlug(e.target.value); if (!document.getElementById('blogMetaTitle').value) { document.getElementById('blogMetaTitle').value = e.target.value; } }); }
+    if (document.getElementById('projTitle') && document.getElementById('projSlug')) { document.getElementById('projTitle').addEventListener('input', function(e) { document.getElementById('projSlug').value = generateSlug(e.target.value); if (!document.getElementById('projMetaTitle').value) { document.getElementById('projMetaTitle').value = e.target.value; } }); }
+// FORM THEM BLOG THU CONG
     const createBlogForm = document.getElementById('createBlogForm');
     if (createBlogForm) {
         createBlogForm.addEventListener('submit', async (e) => {
@@ -185,7 +190,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const image_url = document.getElementById('blogImage').value;
             const content = quillBlog ? quillBlog.root.innerHTML : document.getElementById('blogContent').value;
 
-            await window.HTLAIEngine.publishBlog({ title, category, cover_image: image_url, content });
+            const slug = document.getElementById('blogSlug') ? document.getElementById('blogSlug').value : '';
+            const meta_title = document.getElementById('blogMetaTitle') ? document.getElementById('blogMetaTitle').value : '';
+            const meta_description = document.getElementById('blogMetaDesc') ? document.getElementById('blogMetaDesc').value : '';
+
+            await window.HTLAIEngine.publishBlog({ title, category, cover_image: image_url, content, slug, meta_title, meta_description });
             createBlogForm.reset();
             if (quillBlog) quillBlog.setContents([]);
             alert('Bài viết đã được xuất bản ĐĂNG NGAY thành công!');
@@ -205,7 +214,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const image_url = document.getElementById('projImage').value;
             const description = document.getElementById('projDesc').value;
 
-            await window.HTLAIEngine.publishProject({ title, category, metric_value, metric_label, image_url, description });
+            const slug = document.getElementById('projSlug') ? document.getElementById('projSlug').value : '';
+            const meta_title = document.getElementById('projMetaTitle') ? document.getElementById('projMetaTitle').value : '';
+            const meta_description = document.getElementById('projMetaDesc') ? document.getElementById('projMetaDesc').value : '';
+
+            await window.HTLAIEngine.publishProject({ title, category, metric_value, metric_label, image_url, description, slug, meta_title, meta_description });
             createProjectForm.reset();
             alert('Dự án Portfolio đã được đăng thành công!');
             initDashboard();
@@ -296,4 +309,5 @@ document.addEventListener('DOMContentLoaded', () => {
         return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
     }
 });
+
 
