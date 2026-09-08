@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+﻿document.addEventListener('DOMContentLoaded', () => {
     // 1. Sticky Navbar
     const navbar = document.getElementById('navbar');
     window.addEventListener('scroll', () => {
@@ -195,7 +195,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const publishedBlogs = blogs.filter(b => b.status === 'published');
         if (publishedBlogs.length > 0) {
             blogGrid.innerHTML = publishedBlogs.map(b => `
-                <a href="${b.slug ? 'blog/' + b.slug + '.html' : '#'}" class="blog-card reveal active">
+                <a href="blog-detail.html?slug=${b.slug}" class="blog-card reveal active">
                     <div class="blog-img" style="background: url('${b.image_url}') center/cover;"></div>
                     <div class="blog-content">
                         <span class="blog-category">${escapeHtml(b.category)}</span>
@@ -239,3 +239,5 @@ document.addEventListener('DOMContentLoaded', () => {
     renderDynamicBlogs();
     renderDynamicProjects();
 });
+
+
