@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Hoàng Thế Long Admin Dashboard Controller Logic
  */
 
@@ -165,6 +165,16 @@ document.addEventListener('DOMContentLoaded', () => {
             `).join('');
     }
 
+    
+    // INITIALIZE QUILL EDITOR
+    let quillBlog;
+    if (document.getElementById('blogEditor')) {
+        quillBlog = new Quill('#blogEditor', {
+            theme: 'snow',
+            modules: { toolbar: [ [{ header: [1,2,3,false] }], ['bold','italic','underline','strike'], ['blockquote','code-block'], [{list:'ordered'},{list:'bullet'}], [{align:[]}], ['link','image','video'], ['clean'] ] }
+        });
+    }
+
     // FORM THEM BLOG THU CONG
     const createBlogForm = document.getElementById('createBlogForm');
     if (createBlogForm) {
@@ -173,10 +183,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const title = document.getElementById('blogTitle').value;
             const category = document.getElementById('blogCategory').value;
             const image_url = document.getElementById('blogImage').value;
-            const content = document.getElementById('blogContent').value;
+            const content = quillBlog ? quillBlog.root.innerHTML : document.getElementById('blogContent').value;
 
             await window.HTLAIEngine.publishBlog({ title, category, cover_image: image_url, content });
             createBlogForm.reset();
+            if (quillBlog) quillBlog.setContents([]);
             alert('Bài viết đã được xuất bản ĐĂNG NGAY thành công!');
             initDashboard();
         });
@@ -285,3 +296,4 @@ document.addEventListener('DOMContentLoaded', () => {
         return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
     }
 });
+
