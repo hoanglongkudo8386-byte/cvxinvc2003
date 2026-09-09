@@ -9,12 +9,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const loginError = document.getElementById('loginError');
 
     function showDashboard() {
-        if (loginScreen) loginScreen.style.display = 'none';
-        // Hiện sidebar và main content
-        const sidebar = document.querySelector('.admin-sidebar');
-        const mainContent = document.querySelector('.admin-main');
-        if (sidebar) sidebar.style.display = 'flex';
-        if (mainContent) mainContent.style.display = 'flex';
+        if (loginScreen) {
+            loginScreen.style.display = 'none';
+        }
         initDashboard();
     }
 
