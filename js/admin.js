@@ -1,44 +1,46 @@
-﻿/**
+/**
  * Hoàng Thế Long Admin Dashboard Controller Logic
  */
 
 document.addEventListener('DOMContentLoaded', () => {
     // 1. DANG NHAP BAO MAT
     const loginScreen = document.getElementById('loginScreen');
+    const adminMain = document.getElementById('adminMain');
     const loginForm = document.getElementById('loginForm');
-    const adminPasswordInput = document.getElementById('adminPassword');
-
-    // Kiểm tra session đã đăng nhập chưa
-    
     const loginError = document.getElementById('loginError');
-    if (window.HTLDatabase.isAuthenticated()) {
-        loginScreen.style.display = 'none';
-        adminMain.style.display = 'flex';
+
+    // Nếu đã đăng nhập rồi thì vào thẳng Dashboard
+    if (window.HTLDatabase && window.HTLDatabase.isAuthenticated()) {
+        if (loginScreen) loginScreen.style.display = 'none';
+        if (adminMain) adminMain.style.display = 'flex';
         initDashboard();
     }
-    loginForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const email = document.getElementById('adminEmail').value;
-        const pwd = document.getElementById('adminPassword').value;
-        const btn = loginForm.querySelector('button');
-        const originalText = btn.innerHTML;
-        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Đang xử lý...';
-        const res = await window.HTLDatabase.login(email, pwd);
-        if (res.success) {
-            loginScreen.style.display = 'none';
-            adminMain.style.display = 'flex';
-            initDashboard();
-        } else {
-            if (loginError) { loginError.textContent = res.message; loginError.style.display = 'block'; } else { alert(res.message); }
-            btn.innerHTML = originalText;
-        }
-    });
+
+    if (loginForm) {
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('adminEmail') ? document.getElementById('adminEmail').value : '';
+            const pwd = document.getElementById('adminPassword') ? document.getElementById('adminPassword').value : '';
+            const btn = loginForm.querySelector('button[type="submit"]');
+            const originalText = btn ? btn.innerHTML : '';
+            if (btn) btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Đang xử lý...';
+
+            const res = await window.HTLDatabase.login(email, pwd);
+            if (res.success) {
+                if (loginScreen) loginScreen.style.display = 'none';
+                if (adminMain) adminMain.style.display = 'flex';
+                initDashboard();
+            } else {
+                if (loginError) { loginError.textContent = res.message || 'Sai email hoặc mật khẩu!'; loginError.style.display = 'block'; }
+                if (btn) btn.innerHTML = originalText;
+            }
+        });
+    }
+
     const btnLogout = document.getElementById('btnLogout');
     if (btnLogout) {
         btnLogout.addEventListener('click', () => { window.HTLDatabase.logout(); });
     }
-
-
     // 2. CHUYEN TAB SIDEBAR
     const menuItems = document.querySelectorAll('.menu-item');
     const tabContents = document.querySelectorAll('.tab-content');
