@@ -180,14 +180,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const team = await window.HTLDatabase.getTeamMembers();
         const table = document.getElementById('teamTable');
         if(!table) return;
-        table.innerHTML = team.length === 0 ? '<tr><td colspan="5" style="text-align:center;">Chưa có nhân viên nào. Hãy thêm trong Supabase!</td></tr>' : team.map(u => \<tr><td><strong>\</strong></td><td>\</td><td><span class="status-badge badge-new">\</span></td><td><span class="status-badge badge-completed">\</span></td><td><button class="btn-admin btn-admin-danger" onclick="alert('Tính năng khóa đang phát triển')">Khóa</button></td></tr>\).join('');
+        table.innerHTML = team.length === 0 ? '<tr><td colspan="5" style="text-align:center;">Chưa có nhân viên nào. Hãy thêm trong Supabase!</td></tr>' : team.map(u => `<tr><td><strong>${escapeHtml(u.name)}</strong></td><td>${escapeHtml(u.email)}</td><td><span class="status-badge badge-new">${escapeHtml(u.role)}</span></td><td><span class="status-badge badge-completed">${u.status}</span></td><td><button class="btn-admin btn-admin-danger" onclick="alert('Tính năng khóa đang phát triển')">Khóa</button></td></tr>`).join('');
     }
 
     async function renderAudit() {
         const logs = await window.HTLDatabase.getAuditLogs();
         const table = document.getElementById('auditTable');
         if(!table) return;
-        table.innerHTML = logs.length === 0 ? '<tr><td colspan="4" style="text-align:center;">Chưa có hoạt động nào</td></tr>' : logs.map(l => \<tr><td>\</td><td><strong>\</strong></td><td><span class="status-badge badge-processing">\</span></td><td>\</td></tr>\).join('');
+        table.innerHTML = logs.length === 0 ? '<tr><td colspan="4" style="text-align:center;">Chưa có hoạt động nào</td></tr>' : logs.map(l => `<tr><td>${new Date(l.created_at).toLocaleString('vi-VN')}</td><td><strong>${escapeHtml(l.user_email)}</strong></td><td><span class="status-badge badge-processing">${escapeHtml(l.action)}</span></td><td>${escapeHtml(l.details)}</td></tr>`).join('');
     }
 // RENDER PROJECTS
     async function renderProjects() {
