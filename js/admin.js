@@ -5,19 +5,27 @@
 document.addEventListener('DOMContentLoaded', () => {
     // 1. DANG NHAP BAO MAT
     const loginScreen = document.getElementById('loginScreen');
-    const adminMain = document.getElementById('adminMain');
     const loginForm = document.getElementById('loginForm');
     const loginError = document.getElementById('loginError');
 
+    function showDashboard() {
+        if (loginScreen) loginScreen.style.display = 'none';
+        // Hiện sidebar và main content
+        const sidebar = document.querySelector('.admin-sidebar');
+        const mainContent = document.querySelector('.admin-main');
+        if (sidebar) sidebar.style.display = 'flex';
+        if (mainContent) mainContent.style.display = 'flex';
+        initDashboard();
+    }
+
     // Nếu đã đăng nhập rồi thì vào thẳng Dashboard
     if (window.HTLDatabase && window.HTLDatabase.isAuthenticated()) {
-        if (loginScreen) loginScreen.style.display = 'none';
-        if (adminMain) adminMain.style.display = 'flex';
-        initDashboard();
+        showDashboard();
     }
 
     if (loginForm) {
         loginForm.addEventListener('submit', async (e) => {
+
             e.preventDefault();
             const email = document.getElementById('adminEmail') ? document.getElementById('adminEmail').value : '';
             const pwd = document.getElementById('adminPassword') ? document.getElementById('adminPassword').value : '';
@@ -27,9 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const res = await window.HTLDatabase.login(email, pwd);
             if (res.success) {
-                if (loginScreen) loginScreen.style.display = 'none';
-                if (adminMain) adminMain.style.display = 'flex';
-                initDashboard();
+                showDashboard();
             } else {
                 if (loginError) { loginError.textContent = res.message || 'Sai email hoặc mật khẩu!'; loginError.style.display = 'block'; }
                 if (btn) btn.innerHTML = originalText;
