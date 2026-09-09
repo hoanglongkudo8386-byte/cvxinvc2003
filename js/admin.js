@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Hoàng Thế Long Admin Dashboard Controller Logic
  */
 
@@ -7,6 +7,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const loginScreen = document.getElementById('loginScreen');
     const loginForm = document.getElementById('loginForm');
     const loginError = document.getElementById('loginError');
+    // Xử lý callback từ Google OAuth
+    if (window.HTLDatabase) window.HTLDatabase.checkOAuthCallback();
+
+    const btnGoogleLogin = document.getElementById('btnGoogleLogin');
+    if (btnGoogleLogin) {
+        btnGoogleLogin.addEventListener('click', () => {
+            window.HTLDatabase.loginWithGoogle();
+        });
+    }
+
 
     function showDashboard() {
         if (loginScreen) loginScreen.style.display = 'none';
@@ -355,6 +365,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
     }
 });
+
 
 
 

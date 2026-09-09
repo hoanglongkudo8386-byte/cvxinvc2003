@@ -24,7 +24,25 @@ class HTLDatabaseManager {
 
     
     // --- AUTHENTICATION ---
-    async login(email, password) {
+    
+    loginWithGoogle() {
+        const redirectUrl = encodeURIComponent(window.location.origin + window.location.pathname);
+        window.location.href = "https://gvigrkrlymrllfatuinw.supabase.co/auth/v1/authorize?provider=google&redirect_to=" + redirectUrl;
+    }
+
+    checkOAuthCallback() {
+        const hash = window.location.hash;
+        if (hash && hash.includes('access_token=')) {
+            const params = new URLSearchParams(hash.substring(1));
+            const accessToken = params.get('access_token');
+            if (accessToken) {
+                localStorage.setItem('htl_access_token', accessToken);
+                localStorage.setItem('htl_admin_email', 'Google_OAuth_User');
+                window.location.hash = ''; // Xóa hash đi cho gọn
+            }
+        }
+    }
+async login(email, password) {
         try {
             const res = await fetch("https://gvigrkrlymrllfatuinw.supabase.co/auth/v1/token?grant_type=password", {
                 method: 'POST',
@@ -284,6 +302,7 @@ class HTLDatabaseManager {
 }
 
 window.HTLDatabase = new HTLDatabaseManager();
+
 
 
 
