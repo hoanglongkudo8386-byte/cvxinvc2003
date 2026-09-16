@@ -72,7 +72,7 @@ async login(email, password) {
 // --- LEADS / CONTACTS ---
     async getContacts() {
         try {
-            const res = await fetch(`${SUPABASE_CONFIG.url}/rest/v1/contacts?select=*&order=created_at.desc`, { headers: SUPABASE_CONFIG.headers });
+            const res = await fetch(`${SUPABASE_CONFIG.url}/rest/v1/contacts?select=*&`, { headers: SUPABASE_CONFIG.headers });
             if (!res.ok) throw new Error('Network response was not ok');
             return await res.json();
         } catch (e) {
@@ -138,7 +138,7 @@ async login(email, password) {
 
     async getBlogs() {
         try {
-            const res = await fetch(`${SUPABASE_CONFIG.url}/rest/v1/blogs?select=*&order=created_at.desc`, { headers: SUPABASE_CONFIG.headers });
+            const res = await fetch(`${SUPABASE_CONFIG.url}/rest/v1/blogs?select=*&`, { headers: SUPABASE_CONFIG.headers });
             return await res.json();
         } catch (e) {
             console.error('Lỗi lấy bài viết:', e);
@@ -189,7 +189,7 @@ async login(email, password) {
     // --- PORTFOLIO PROJECTS ---
     async getProjects() {
         try {
-            const res = await fetch(`${SUPABASE_CONFIG.url}/rest/v1/projects?select=*&order=created_at.desc`, { headers: SUPABASE_CONFIG.headers });
+            const res = await fetch(`${SUPABASE_CONFIG.url}/rest/v1/projects?select=*&`, { headers: SUPABASE_CONFIG.headers });
             return await res.json();
         } catch (e) {
             console.error('Lỗi lấy dự án:', e);
@@ -239,7 +239,7 @@ async login(email, password) {
     // --- TEAM MEMBERS ---
     async getTeamMembers() {
         try {
-            const res = await fetch("https://gvigrkrlymrllfatuinw.supabase.co/rest/v1/team_members?select=*&order=created_at.desc", { headers: this.headers });
+            const res = await fetch("https://gvigrkrlymrllfatuinw.supabase.co/rest/v1/team_members?select=*&", { headers: this.headers });
             if(!res.ok) return [];
             return await res.json();
         } catch(e) { return []; }
@@ -248,7 +248,7 @@ async login(email, password) {
     // --- AUDIT LOGS ---
     async getAuditLogs() {
         try {
-            const res = await fetch("https://gvigrkrlymrllfatuinw.supabase.co/rest/v1/audit_logs?select=*&order=created_at.desc&limit=50", { headers: this.headers });
+            const res = await fetch("https://gvigrkrlymrllfatuinw.supabase.co/rest/v1/audit_logs?select=*&&limit=50", { headers: this.headers });
             if(!res.ok) return [];
             return await res.json();
         } catch(e) { return []; }
@@ -302,6 +302,7 @@ async login(email, password) {
 }
 
 window.HTLDatabase = new HTLDatabaseManager();
+
 
 
 
